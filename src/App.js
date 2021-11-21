@@ -1,24 +1,52 @@
-import logo from './logo.svg';
 import './App.css';
+import List from './Wishlist';
+import React, { useEffect, useState } from 'react';
+import {
+  HashRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
 
-function App() {
+const transform = wishes => {
+  const data = {}
+
+  wishes.map(wish => {
+    if (data[wish.Owner] === undefined) {
+      data[wish.Owner] = {}
+      data[wish.Owner].id = wish.CalendarId
+      data[wish.Owner].owner = wish.Owner
+      data[wish.Owner].items = []
+    }
+
+    data[wish.Owner].items.push(wish)
+
+    return wish
+  })
+
+  return Object.keys(data).map(w => data[w])
+}
+
+const App = () => {
+  const [wishes, setWishes] = useState([]);
+
+  useEffect(() => {
+    fetch('https://0jq009rhqf.execute-api.eu-north-1.amazonaws.com/default/servus')
+      .then(results => results.json())
+      .then(data => {
+        console.log(data)
+        setWishes(data)
+      })
+      .catch(error => {
+        console.log(error)
+      });
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Switch>
+        {transform(wishes).map(wishlist => <Route key={wishlist.id} path={"/" + wishlist.owner} component={() => <List {...wishlist} />} />)}
+      </Switch>
+    </Router>
   );
 }
 
