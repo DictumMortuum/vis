@@ -1,34 +1,13 @@
-.wishlist {
-  margin: 0 auto;
-  position: absolute;
-  transform: translate(-50%, -50%);
-  left: 50%;
-  top: 50%;
-}
-
 h2 {
   text-align: center;
   text-transform: capitalize;
   color: #2e3440;
 }
 
-ul {
-  display: block;
-  width: 800px;
-}
-
 li {
-  padding: 5px;
-  padding-left: 15px;
   margin-bottom: 10px;
   list-style: none;
   border: 1px solid #81a1c1;
-  display: flex;
-  justify-content: space-between;
-}
-
-li > button {
-  width: 12em;
 }
 
 li > a {

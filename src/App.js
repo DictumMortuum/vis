@@ -1,4 +1,3 @@
-import './App.css';
 import List from './Wishlist';
 import React, { useEffect, useState } from 'react';
 import {
