@@ -12,7 +12,11 @@ import {
   SelectInput,
   SimpleForm,
   BooleanInput,
-  Datagrid, DatagridBody, RecordContextProvider
+  Datagrid,
+  DatagridBody,
+  RecordContextProvider,
+  DateField,
+  UrlField
 } from 'react-admin';
 import { Button, TableCell, TableRow } from '@mui/material';
 
@@ -95,4 +99,15 @@ export const WishCreate = () => (
       </ReferenceInput>
     </SimpleForm>
   </Create>
+);
+
+export const CouponList = () => (
+  <List perPage={50}>
+    <Datagrid rowClick="">
+      <TextField source="code" />
+      <UrlField source="store" />
+      <TextField source="desc" />
+      <DateField source="valid_until" />
+    </Datagrid>
+  </List>
 );
