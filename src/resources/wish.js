@@ -55,9 +55,9 @@ const LinkButton = props => {
 }
 
 const postFilters = [
-  <ReferenceInput source="person_id" reference="people">
-    <SelectInput optionValue="id" optionText="name" defaultValue={1} />
-  </ReferenceInput>
+  <ReferenceInput source="person_id" reference="people" alwaysOn>
+    <SelectInput optionValue="id" optionText="name" />
+  </ReferenceInput>,
 ];
 
 const MyDatagridRow = ({ record, id, children }) => (
@@ -77,7 +77,7 @@ const MyDatagridBody = props => <DatagridBody {...props} row={<MyDatagridRow />}
 const MyDatagrid = props => <Datagrid {...props} body={<MyDatagridBody />} />;
 
 export const WishList = () => (
-  <List perPage={50} filters={postFilters} sort={{ field: 'name', order: 'DESC' }} header={false}>
+  <List perPage={50} filters={postFilters} sort={{ field: 'name', order: 'DESC' }} header={false} filterDefaultValues={{ person_id: 1 }}>
     <MyDatagrid rowClick="" header={() => { }}>
       <LinkButton />
       {/* <ReferenceField source="person_id" reference="people">
